@@ -49,7 +49,7 @@
               <a class="btn btn-primary" href="./delete.do?id=${blog.id }">삭제</a>
             </c:if>
 
-            <form action="delete.do" method="post" id="contactForm" >
+            <form action="deleteFO.do?id=${blog.id}" method="post" id="contactForm" >
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>Email Address</label>
@@ -63,8 +63,6 @@
                   <input type="password" name="pw" class="form-control" placeholder="PassWord" required data-validation-required-message="Please enter your password.">
                   <p class="help-block text-danger"></p>
                 </div>
-                <input type="hidden" name="id" value="${blog.id}">
-                <input type="hidden" name="id" value="${blog.blogger}">
               </div>
               <br>
               <button type="submit" class="btn btn-primary">삭제</button>

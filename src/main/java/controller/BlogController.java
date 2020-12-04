@@ -17,19 +17,19 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-@WebServlet({"/blog/update.do", "/blog/update-form.do", "/blog/create.do", "/blog/read.do", "/blog/list.do", "/blog/delete.do"})
+@WebServlet({"/blog/update.do", "/blog/update-form.do", "/blog/create.do", "/blog/read.do", "/blog/list.do", "/blog/delete.do","/blog/deleteFO.do"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 30, maxRequestSize = 1024 * 1024 * 50)
 // 2MB 단위로 쓰기, 1개 파일 최대 크기 30MB, 총 업로드 용량 50MB
 
-
-
 public class BlogController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    MemberDAOImpl dao = null;
+
     public BlogController() {
         super();
     }
+
     BlogDAOImpl repository = null;
+    MemberDAOImpl dao = null;
     Blog blog = null;
     List<Blog> blogList = null;
 
@@ -41,11 +41,10 @@ public class BlogController extends HttpServlet {
         HttpSession session = request.getSession();
         request.setCharacterEncoding("UTF-8");
         repository = new BlogDAOImpl();
-        dao = new MemberDAOImpl();
         String uri = request.getRequestURI();
         String action = uri.substring(uri.lastIndexOf("/") + 1);
-        if(action.equals("list.do")) {
 
+        if(action.equals("list.do")) {
             if((blogList = repository.readList()) != null) {
                 request.setAttribute("bloglist", blogList);
                 request.getRequestDispatcher("list-view.jsp").forward(request, response);
@@ -164,39 +163,24 @@ public class BlogController extends HttpServlet {
                 request.getRequestDispatcher("../error/message.jsp").forward(request, response);
             }
         }
-
         else if(action.equals("delete.do")) {
             Blog retBlog = null;
             blog = new Blog();
             blog.setId(Integer.parseInt(request.getParameter("id")));
-            blog.setBlogger((String) request.getAttribute("blogger"));
-            retBlog = repository.read(blog);
-
-            Member retMember = null; // 데이터베이스에서 가져온 레코드를 객체에 저장
-            String email = request.getParameter("email");
-            String pw = request.getParameter("pw");
-
-            Member member = new Member(); // 전송하기 위한
-            member.setEmail(email);
-            member.setPw(pw);
-            retMember = dao.read(member);
-
-            if( (blog.getBlogger() == retMember.getEmail()) && pw.equals(retMember.getPw()) ) {
-                repository.delete(blog);
+            if(repository.delete(blog) > 0) {
                 request.setAttribute("blog", blog);
                 request.getRequestDispatcher("list.do").forward(request, response);
-            }
-            else {
+            } else {
                 request.setAttribute("message", "블로그 업데이트 오류 - 불편을 드려 죄송합니다.");
                 request.getRequestDispatcher("../error/message.jsp").forward(request, response);
             }
         }
-
         else {
             request.setAttribute("message", "잘못된 요청입니다. 확인하시기 바랍니다.");
             request.getRequestDispatcher("../error/message.jsp").forward(request, response);
         }
     }
+
     private String getFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
@@ -212,7 +196,37 @@ public class BlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doService(request, response);
         // tomcat 9에서는 conf/server.xml의 URIEncoding=UTF-8 설정이 없어도 Get 방식으로 전송 시  문제가 없음
+        HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        repository = new BlogDAOImpl();
+        dao = new MemberDAOImpl();
+        String uri = request.getRequestURI();
+        String action = uri.substring(uri.lastIndexOf("/") + 1);
 
+        if(action.equals("deleteFO.do")) {
+            Blog retBlog = null;
+            blog = new Blog();
+            blog.setId(Integer.parseInt(request.getParameter("id")));
+            retBlog = repository.read(blog);
+
+            String email = request.getParameter("email");
+            String pw = request.getParameter("pw");
+            Member retMember = null;
+            Member m = new Member();
+            m.setEmail(email);
+            m.setPw(pw);
+            retMember = dao.read(m);
+            if ((retBlog.getBlogger() == m.getEmail()) && pw.equals(retMember.getPw())){
+                if (repository.delete(blog) > 0) {
+                    request.setAttribute("blog", blog);
+                    request.getRequestDispatcher("list.do").forward(request, response);
+                }
+            }
+            else {
+                request.setAttribute("message", "블로그 업데이트 오류 - 불편을 드려 죄송합니다.");
+                request.getRequestDispatcher("../error/message.jsp").forward(request, response);
+            }
+        }
     }
 
     /**
