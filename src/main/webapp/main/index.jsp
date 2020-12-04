@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>egyblog - main index</title>
+    <title>중요과제</title>
 
     <jsp:include page="../main/index-head.jsp" />
 
@@ -100,11 +100,6 @@
                 </span>
             </div>
             <hr>
-            <!-- Pager
-            <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-            </div>
-            -->
         </div>
     </div>
 </div>

@@ -41,6 +41,7 @@ public class BlogController extends HttpServlet {
         HttpSession session = request.getSession();
         request.setCharacterEncoding("UTF-8");
         repository = new BlogDAOImpl();
+        dao = new MemberDAOImpl();
         String uri = request.getRequestURI();
         String action = uri.substring(uri.lastIndexOf("/") + 1);
 
@@ -175,6 +176,30 @@ public class BlogController extends HttpServlet {
                 request.getRequestDispatcher("../error/message.jsp").forward(request, response);
             }
         }
+        else if(action.equals("delete2.do")) {
+            blog = new Blog();
+            blog.setId(Integer.parseInt(request.getParameter("id")));
+
+            String email = request.getParameter("email");
+            String pw = request.getParameter("pw");
+
+            Member m = new Member();
+            m.setEmail(email);
+            m.setPw(pw);
+
+            Member retMember = null;
+            if((retMember = dao.read(m)) != null && pw.equals(retMember.getPw())){
+                if (repository.delete(blog) > 0) {
+                    request.getRequestDispatcher("../blog/list.do").forward(request, response);
+                    //request.getRequestDispatcher("list.do").forward(request, response);
+                } else {
+                    request.setAttribute("message", "블로그 업데이트 오류 - 불편을 드려 죄송합니다.");
+                    request.getRequestDispatcher("../error/message.jsp").forward(request, response);
+                }
+            }
+
+        }
+
         else {
             request.setAttribute("message", "잘못된 요청입니다. 확인하시기 바랍니다.");
             request.getRequestDispatcher("../error/message.jsp").forward(request, response);
@@ -196,33 +221,6 @@ public class BlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doService(request, response);
         // tomcat 9에서는 conf/server.xml의 URIEncoding=UTF-8 설정이 없어도 Get 방식으로 전송 시  문제가 없음
-
-        String uri = request.getRequestURI();
-        String action = uri.substring(uri.lastIndexOf("/") + 1);
-
-        if(action.equals("delete2.do")) {
-            blog = new Blog();
-            blog.setId(Integer.parseInt(request.getParameter("id")));
-
-            String email = request.getParameter("email");
-            String pw = request.getParameter("pw");
-
-            Member m = new Member();
-            m.setEmail(email);
-            m.setPw(pw);
-
-            Member retMember = null;
-            if((retMember = dao.read(m)) != null && pw.equals(retMember.getPw())){
-                if (repository.delete(blog) > 0) {
-                    request.setAttribute("blog", blog);
-                    request.getRequestDispatcher("list.do").forward(request, response);
-                } else {
-                    request.setAttribute("message", "블로그 업데이트 오류 - 불편을 드려 죄송합니다.");
-                    request.getRequestDispatcher("../error/message.jsp").forward(request, response);
-                }
-            }
-
-        }
     }
 
     /**
