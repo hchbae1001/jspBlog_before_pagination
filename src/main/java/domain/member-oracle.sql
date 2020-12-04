@@ -9,8 +9,8 @@ create table m201712045 (
     address varchar2(50)
 );
 
-INSERT INTO m201712045 VALUES(seq_m201712045.nextval,'root@induk.ac.kr', 'cometrue','관리자', '9507620','korea');
 INSERT INTO m201712045 VALUES(seq_m201712045.nextval,'egyou@induk.ac.kr', 'cometrue','유응구', '9507625', 'korea');
+INSERT INTO m201712045 VALUES(seq_m201712045.nextval,'root@induk.ac.kr','cometrue','관리자','01030377903','korea');
 
 select * from m201712045;
 

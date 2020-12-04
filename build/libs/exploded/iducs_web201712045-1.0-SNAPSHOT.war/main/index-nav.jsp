@@ -31,6 +31,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../blog/list.do">Blogs</a>
                 </li>
+                <c:choose>
+                    <c:when test="${sessionScope.login.email == 'root@induk.ac.kr'}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../member/mlist.do">Member List</a>
+                        </li>
+                    </c:when>
+                </c:choose>
 <c:choose>
     <c:when test="${sessionScope.login == null}">
                 <li class="nav-item">

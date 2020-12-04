@@ -38,70 +38,33 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <form action="./update.do" method="post">
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Email Address</label>
-                        <input type="email" readonly value="${sessionScope.login.email}" name="email" class="form-control" placeholder="Email Address" required data-validation-required-message="Please enter your email.">
-                        <p class="help-block text-danger"></p>
-                    </div>
+            <form action="./update.do" method="post" class="needs-validation" novalidate="">
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted"></span></label>
+                    <input type="email" class="form-control" name="email" value="${sessionScope.login.email}" id="email" readOnly>
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>PassWord Check</label>
-                        <input type="password" name="pwcheck" class="form-control" placeholder="PassWord Check" required data-validation-required-message="Please enter your password.">
-                        <p class="help-block text-danger"></p>
-                    </div>
+                <div class="mb-3">
+                    <label for="pw">Password</label>
+                    <input type="password" class="form-control" name="pw" id="pw" placeholder="passwd" required="">
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Update PassWord</label>
-                        <input type="password" name="pw" class="form-control" placeholder="Update PassWord" data-validation-required-message="Please enter your email.">
-                        <p class="help-block text-danger"></p>
-                    </div>
+                <div class="mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" value="${sessionScope.login.name}" id="name" value="${sessionScope.login.name}" placeholder="name" required="">
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Name</label>
-                        <input type="text" name="name" value="${sessionScope.login.name}" class="form-control" placeholder="Name" required data-validation-required-message="Please enter your Name.">
-                        <p class="help-block text-danger"></p>
-                    </div>
+                <div class="mb-3">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" value="${sessionScope.login.phone}" id="phone" placeholder="phone">
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Phone</label>
-                        <input type="text" name="phone" value="${sessionScope.login.phone}" class="form-control" placeholder="Phone">
-                        <p class="help-block text-danger"></p>
-                    </div>
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" value="${sessionScope.login.address}" id="address" placeholder="address">
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Address</label>
-                        <input type="text" name="address" value="${sessionScope.login.address}" class="form-control" placeholder="Address">
-                        <p class="help-block text-danger"></p>
-                    </div>
+                <hr class="mb-4">
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                    <button class="btn btn-primary" type="button"><a href="../member/delete-form.jsp" class="text-center">Unregister</a></button>
                 </div>
-                <br>
-                <div id="success"></div>
-                <button type="submit" class="btn btn-primary" id="sendMessageButton">Update</button>
-            </form>
-            <form action="./delete.do" method="post" id="contactForm" novalidate>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Email Address</label>
-                        <input type="email" readonly value="${sessionScope.login.email}" name="email" class="form-control" placeholder="Email Address" required data-validation-required-message="Please enter your email.">
-                        <p class="help-block text-danger"></p>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>PassWord</label>
-                        <input type="password" name="pw" class="form-control" placeholder="PassWord" required data-validation-required-message="Please enter your password.">
-                        <p class="help-block text-danger"></p>
-                    </div>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Delete User</button>
             </form>
         </div>
     </div>
