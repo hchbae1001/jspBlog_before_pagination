@@ -12,7 +12,7 @@
         <a class="navbar-brand" href="../main/index.jsp">
 <c:choose>
     <c:when test="${sessionScope.login == null}">
-            egy's blog
+            2학년2학기-JSP중요과제
     </c:when>
     <c:otherwise>
             ${sessionScope.login.email}

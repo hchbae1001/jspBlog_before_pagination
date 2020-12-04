@@ -49,18 +49,13 @@
               <a class="btn btn-primary" href="./delete.do?id=${blog.id }">삭제</a>
             </c:if>
 
-            <form action="deleteFO.do?id=${blog.id}" method="post" id="contactForm" >
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls">
-                  <label>Email Address</label>
-                  <input type="email" readonly value="${blog.blogger}" name="email" class="form-control" placeholder="Email Address" required data-validation-required-message="Please enter your email.">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
+            <form action="./delete2.do" method="post" id="contactForm" >
+                  <input type="hidden" value="${blog.id}" name="id"/>
+                  <input type="hidden" value="${blog.blogger}" name="email"/>
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>PassWord</label>
-                  <input type="password" name="pw" class="form-control" placeholder="PassWord" required data-validation-required-message="Please enter your password.">
+                  <input type="password" name="pw" class="form-control" placeholder="Bloger's Password" required data-validation-required-message="Please enter your password.">
                   <p class="help-block text-danger"></p>
                 </div>
               </div>

@@ -32,8 +32,8 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>What Why How</h1>
-                    <span class="subheading">by 유 응 구</span>
+                    <h1>JSP 중요과제</h1>
+                    <span class="subheading">201712045 배현철</span>
                 </div>
             </div>
         </div>
