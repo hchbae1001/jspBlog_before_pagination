@@ -43,7 +43,8 @@ public class BlogController extends HttpServlet {
         String action = uri.substring(uri.lastIndexOf("/") + 1);
 
         if(action.equals("list.do")) {
-            if((blogList = repository.readList()) != null) {
+            int page = Integer.parseInt(request.getParameter("page"));
+            if((blogList = repository.readList(page)) != null) {
                 request.setAttribute("bloglist", blogList);
                 request.getRequestDispatcher("list-view.jsp").forward(request, response);
             } else {

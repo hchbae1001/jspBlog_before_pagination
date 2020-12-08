@@ -7,7 +7,7 @@ import java.util.List;
 public interface BlogDAO {
     int create(Blog blog);
     Blog read(Blog blog);
-    List<Blog> readList();
+    List<Blog> readList(int page);
     int update(Blog blog);
     int delete(Blog blog);
 }

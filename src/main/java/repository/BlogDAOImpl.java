@@ -58,14 +58,19 @@ public class BlogDAOImpl extends DAOImplOracle implements BlogDAO {
     }
 
     @Override
-    public List<Blog> readList() {
+    public List<Blog> readList(int page) {
+        int start = 1 + (page-1)*3;
+        int end = 3*page;
         List<Blog> blogList = null;
         Blog retBlog = null;
 
-        String sql = "select * from b201712045 order by id desc";
+        String sql = "SELECT * FROM (SELECT ROWNUM NUM, Blog.* FROM (SELECT * FROM b201712045 order by id desc)Blog) where NUM between ? and ?";
         try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
+            stmt = null;
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,start);
+            pstmt.setInt(2,end);
+            rs = pstmt.executeQuery();
             blogList = new ArrayList<Blog>();
             while(rs.next()) { // 다음 record값을 접근
                 // rs : record 집합, rs.getString(1) : 현재 레코드의 첫번재 필드 값

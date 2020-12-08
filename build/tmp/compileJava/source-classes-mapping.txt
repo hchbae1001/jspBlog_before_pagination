@@ -6,8 +6,8 @@ service/MemberServiceImpl.java
  service.MemberServiceImpl
 repository/MemberDAOImpl.java
  repository.MemberDAOImpl
-controller/RequestMapping.java
- controller.RequestMapping
+controller/BlogController.java
+ controller.BlogController
 service/MemberService.java
  service.MemberService
 controller/MemberController.java
@@ -28,5 +28,5 @@ repository/DAO.java
  repository.DAO
 domain/Member.java
  domain.Member
-controller/BlogController.java
- controller.BlogController
+controller/RequestMapping.java
+ controller.RequestMapping

@@ -24,6 +24,8 @@ select * from b201712045;
 
 update b201712045 set title='update제목', content='update 내용', filepath='ddochi.png' where id=48;
 
+SELECT * FROM (SELECT ROWNUM NUM, Blog.* FROM (SELECT * FROM b201712045 order by id desc)Blog) where NUM between 2 and 5;
+
 update b201712045 set title='update제목', content='update 내용', filepath='ddochi.png', 
 reg_date_time=TO_TIMESTAMP('2019-11-11 11:11:00.0', 'YYYY-MM-DD HH24:MI:SS.FF3')  where id=47;
 

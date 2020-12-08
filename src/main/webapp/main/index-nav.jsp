@@ -22,7 +22,7 @@
                     <a class="nav-link" href="../main/index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../blog/list.do">Blogs</a>
+                    <a class="nav-link" href="../blog/list.do?page=1">Blogs</a>
                 </li>
                 <c:choose>
                     <c:when test="${sessionScope.login.email == 'root@induk.ac.kr'}">
