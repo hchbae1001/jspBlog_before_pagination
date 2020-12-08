@@ -48,7 +48,10 @@
 	         <a class="btn btn-primary" href="./update-form.do?id=${blog.id }">수정</a> &nbsp; &nbsp;
               <a class="btn btn-primary" href="./delete.do?id=${blog.id }">삭제</a>
             </c:if>
-
+<!--
+            ./delete2.do를 실행하기 위해 post 형식을 갖는 폼을 만들고, hidden으로 blog의 아이디와 작성자를 기입 후
+            비밀번호를 입력받는 칸을 만들
+-->
             <form action="./delete2.do" method="post" id="contactForm" >
                   <input type="hidden" value="${blog.id}" name="id"/>
                   <input type="hidden" value="${blog.blogger}" name="email"/>

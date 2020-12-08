@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: egyou@office.induk.ac.kr
-  Date: 202009-11
-  Time: 오후 5:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!-- Bootstrap core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

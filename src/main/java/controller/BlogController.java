@@ -2,12 +2,9 @@ package controller;
 
 import domain.Blog;
 import domain.Member;
-import repository.BlogDAO;
 import repository.BlogDAOImpl;
-import repository.MemberDAO;
 import repository.MemberDAOImpl;
 
-import javax.faces.annotation.RequestMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -176,21 +173,21 @@ public class BlogController extends HttpServlet {
                 request.getRequestDispatcher("../error/message.jsp").forward(request, response);
             }
         }
-        else if(action.equals("delete2.do")) {
-            blog = new Blog();
-            blog.setId(Integer.parseInt(request.getParameter("id")));
+        else if(action.equals("delete2.do")) { // delete2.do = 작성자가 아니더라도 작성자의 비밀번호를 입력하면 삭제가능하도록 만든 기능
+            blog = new Blog(); //새로은 blog 객체 생성
+            blog.setId(Integer.parseInt(request.getParameter("id"))); //form을 통해 전달된 id값을 가져오기
 
-            String email = request.getParameter("email");
+            String email = request.getParameter("email"); //삭제하려는 게시글의 blog.blogger 를 가져오기
             String pw = request.getParameter("pw");
 
-            Member m = new Member();
+            Member m = new Member(); //새로운 member 객체 생성
             m.setEmail(email);
             m.setPw(pw);
 
             Member retMember = null;
-            if((retMember = dao.read(m)) != null && pw.equals(retMember.getPw())){
-                if (repository.delete(blog) > 0) {
-                    request.getRequestDispatcher("../blog/list.do").forward(request, response);
+            if((retMember = dao.read(m)) != null && pw.equals(retMember.getPw())){ //멤버 m의 이메일과 비밀번호로 로그인이 되고 and 로그인된 멤버의 비밀번호와 앞서 페이지에서 기입한 비밀번호가 같은지 check
+                if (repository.delete(blog) > 0) { //BlogDAOImpl에서 delete를 Id 값으로 집어넣어, 삭제가 된다면
+                    request.getRequestDispatcher("../blog/list.do").forward(request, response); // 블로그리스트로 이동
                     //request.getRequestDispatcher("list.do").forward(request, response);
                 } else {
                     request.setAttribute("message", "블로그 업데이트 오류 - 불편을 드려 죄송합니다.");

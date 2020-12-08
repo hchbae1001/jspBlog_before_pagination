@@ -1,9 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: egyou@office.induk.ac.kr
-  Date: 2020-10-05
-  Time: 오전 8:58
-  To change this template use File | Settings | File Templates.
+  User: hchbae1001@gmail.com
+  Date: 2020-12-05
+  Time: 오전 9:58
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
